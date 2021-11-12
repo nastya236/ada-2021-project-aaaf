@@ -5,7 +5,7 @@ from utils import iterate
 from urllib.error import HTTPError
 from tqdm import tqdm
 
-gender_id_dict= {
+gender_id_dict = {
     "Q6581072": "female",
     "Q6581097": "male"
 }
@@ -54,7 +54,7 @@ def get_occupations(e):
 def join_wikidata(row, client):
     row["gender"], row["birth"], row["occupation_ids"], row["citizenship_id"] = [], [], [], []
 
-    for i, id_ in enumerate(row["id"]):
+    for i, id_ in enumerate(row["qids"]):
         try:
             entity = client.get(id_, load=True).data["claims"]
         except HTTPError:
@@ -86,17 +86,15 @@ def datavalue_extraction(pos):
 
 if __name__ == "__main__":
     arg_parser = ArgumentParser()
-    arg_parser.add_argument("--file", type=str)
+    arg_parser.add_argument("--year", type=str)
     args = arg_parser.parse_args()
 
     c = Client()
 
-    it = map(json.loads, list(iterate(args.file)))
+    input_file =  f'quotes-{args.year}-filtered.json'
+    output_file = f'quotes-{args.year}-wikimerged.json'
+    it = map(json.loads, list(iterate(input_file)))
     merged = map(lambda row_: join_wikidata(row_, client=c), it)
-
-    name, ext = args.file.split(".")
-    name, _ = name.rsplit("-", maxsplit=1)
-    output_file = f"{name}-merged.{ext}"
 
     with open(output_file, "a") as file:
         for row in tqdm(merged):

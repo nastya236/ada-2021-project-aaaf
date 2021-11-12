@@ -30,13 +30,13 @@ def preprocess(it_):
 
 if __name__ == "__main__":
     arg_parser = ArgumentParser()
-    arg_parser.add_argument("--file", type=str)
+    arg_parser.add_argument("--year", type=int)
     args = arg_parser.parse_args()
 
-    filename, _ = args.file.split(".")
+    filename = f'quotes-{args.year}'
 
-    it = preprocess(iterate(args.file))
-    with open(f"{filename}-processed.json", "w+") as file:
+    it = preprocess(iterate(f'{filename}.json'))
+    with open(f"{filename}-filtered.json", "w+") as file:
         for row in tqdm(it):
             json.dump(row, file)
             file.write("\n")

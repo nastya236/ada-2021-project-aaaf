@@ -41,5 +41,5 @@ if __name__ == "__main__":
         for k in i["citizenship_id"]:
             if k is not None:
                 countries.update([k, ])
-    create_voc("dataset/count_vocab.json", countries)
-    create_voc("dataset/occ_vocab.json", occ)
+    create_voc("data/countries_vocab.json", countries)
+    create_voc("data/occupations_vocab.json", occ)
