@@ -85,20 +85,18 @@ Preparing presentation
 
 2. Process jsons with quatations to parse quatations with tag climate change:
     
-    `python3 scripts/filter.py --file='quotes-{YEAR}.json'`
+    `python3 scripts/filter.py --year={YEAR}'`
 3. Megre this files with wikidata:
     
-    `python3 scripts/merge.py --file='quotes-{YEAR}-processed.json'`
+    `python3 scripts/wikidata_merge.py --year={YEAR}'`
 4. Move processed data to data folder (default 'data'):
     
     `mv quotes-{YEAR}-processed.json data` 
     
-    `mv quotes-{YEAR}-merged.json data`
+    `mv quotes-{YEAR}-wikimerged.json data`
     
 5. Merge all json files for all years from 2008 to 2020, received 'data/union.json'.
 
 6. Creat vocabularies for countries and occupations for processed quatations:
     
     `python scripts/utils.py --file=data/union.json`
-
-asd
