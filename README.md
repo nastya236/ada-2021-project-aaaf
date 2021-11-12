@@ -74,8 +74,7 @@ We should notice the data we have is very large, that is why we are going to use
 We are going to start with simple graphical and statistical exploration of data.
 In this part we are going to use basic data analysis tools to get in touch with our data and to understand precisely the direction of analysis on the next parts.
 1. For some first and last names, presented in quotes dataset, there are several wikipedia pages, so we have to extract features of the person we are interested in.
-2. 
-    
+2. Work with occupations: combine similar occupations (feature from wikidata) in clusters to investigate the popularity of the trend among occupations.
 ##### Correlation analysis
 
 
