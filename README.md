@@ -79,7 +79,7 @@ Preparing presentation
 
 1. Download file from zenodo for specific year and unzip this file: 
 
-    `wget https://zenodo.org/record/4277311/files/quotes-YEAR.json.bz2`
+    `wget https://zenodo.org/record/4277311/files/quotes-{YEAR}.json.bz2`
 
     `bzip2 -d quotes-YEAR.json.bz2`
 
