@@ -8,6 +8,7 @@ In the 21 century Internet and Social Networks brought the speed and depth of tr
 For example some resources or occupations(profesional) could be biased on the some topic. Talking about our data - the frequency of some topic could be much higher or lower that the average.
 
 #### Research Questions:
+The trends we are talking about are some topics, for example it could be `climate change, elections, Trump`. In our further analysis we would catch the appereance of this topics in the quoutes. We could use exact substring search or kind of similarity matching as fuzzy matching.
 ##### Trends spreading
 The first direction of our analysis is a simple and straightforward analysis of trens spreading. It then would be used as the base for the second part - biases and correlation analysis. Talking about this part we are going to focus on:
 1. The frequency of topic across different years
@@ -42,61 +43,61 @@ We are going to use this data source to acquire all data about speakers in out i
 
 
 #### Methods
-1. Raw data handling
-
-We are going to start with simple graphical and statistical exploration of data: 
-1. Simple Exploretary Analysis
-    In this part we are going to use basic data anslysis tools to get in touch with our data and to understand precisely the direction of analysis on the next parts.
-    1.1 Checking the distribution of all categorical data we have (gender, occupation)
-    1.2 Checking the 
-    
-2. Correlation analysis
-
-3.
-
-
-#### Proposed timeline & internal milestones
-12 Nov 2021: Milestone P2
-
-19 Nov 2021:
-> Adding other topics to the trend research
-
-
-26 Nov 2021:
-> Correlation analysis MVP
-
-3 Dec 2021: 
->Building frontend
-Correlation analysis id done
-
-10 Dec 2021:
-Frontend is built
-Data is ready
-
-17 Dec 2021 Milestone P3
-Preparing presentation
-
+We should notice the data we have is very large, that is why we are going to use prepocessing as much as we can. In our case we are going to filter quotes containg some interesting for us words(topics).
+##### Raw data processing 
 
 1. Download file from zenodo for specific year and unzip this file: 
 
-    `wget https://zenodo.org/record/4277311/files/quotes-{YEAR}.json.bz2`
+    `wget https://zenodo.org/record/4277311/files/quotes-YEAR.json.bz2`
 
     `bzip2 -d quotes-YEAR.json.bz2`
 
 2. Process jsons with quatations to parse quatations with tag climate change:
     
-    `python3 scripts/filter.py --year={YEAR}'`
+    `python3 scripts/filter.py --file='quotes-{YEAR}.json'`
 3. Megre this files with wikidata:
     
-    `python3 scripts/wikidata_merge.py --year={YEAR}'`
+    `python3 scripts/merge.py --file='quotes-{YEAR}-processed.json'`
 4. Move processed data to data folder (default 'data'):
     
     `mv quotes-{YEAR}-processed.json data` 
     
-    `mv quotes-{YEAR}-wikimerged.json data`
+    `mv quotes-{YEAR}-merged.json data`
     
 5. Merge all json files for all years from 2008 to 2020, received 'data/union.json'.
 
 6. Creat vocabularies for countries and occupations for processed quatations:
     
     `python scripts/utils.py --file=data/union.json`
+    
+##### Simple Exploratary Analysis
+We are going to start with simple graphical and statistical exploration of data.
+In this part we are going to use basic data anslysis tools to get in touch with our data and to understand precisely the direction of analysis on the next parts.
+1. Checking the distribution of all categorical data we have (gender, occupation)
+2. Checking the 
+    
+##### Correlation analysis
+
+
+
+#### Proposed timeline & internal milestones
+12 Nov 2021: Milestone P2
+
+19 Nov 2021:
+> Adding other topics to the trend research and performing basic analysis. First draft of hypothesis about the data.
+
+
+26 Nov 2021:
+> Correlation analysis MVP - using GoogleTrend API.
+
+3 Dec 2021: 
+>Building frontend to better present our data story.
+Correlation analysis id done.
+
+10 Dec 2021:
+> Frontend is built
+All required analyses are done and well-packaged.
+
+17 Dec 2021 Milestone P3
+> Preparing slides and frontend for the final presentations.
+
