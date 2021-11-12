@@ -2,7 +2,7 @@ import json
 from argparse import ArgumentParser
 
 from tqdm import tqdm
-from .utils import iterate
+from utils import iterate
 
 
 def filter_dict(row: dict) -> dict:

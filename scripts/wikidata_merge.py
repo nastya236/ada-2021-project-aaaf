@@ -10,16 +10,10 @@ gender_id_dict= {
     "Q6581097": "male"
 }
 
+
 def get_birthday(e):
     if "P569" in e:
         birth = datavalue_extraction(e["P569"][0])
-        if birth is not None:
-            return birth["time"] if "time" in birth else None
-    return None
-
-def get_birth(pos):
-    if "P569" in pos:
-        birth = datavalue_extraction(pos["P569"][0])
         if birth is not None:
             return birth["time"] if "time" in birth else None
     return None
@@ -66,7 +60,7 @@ def join_wikidata(row, client):
         except HTTPError:
             continue
 
-        birth = get_birth(entity)
+        birth = get_birthday(entity)
         gender = get_gender(entity)
         citizenship_id = get_citizenship(entity)
         occupation_ids = get_occupations(entity)
@@ -80,6 +74,7 @@ def join_wikidata(row, client):
             break
 
     return row
+
 
 def datavalue_extraction(pos):
     if "mainsnak" in pos:

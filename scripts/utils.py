@@ -3,7 +3,6 @@ from argparse import ArgumentParser
 from tqdm import tqdm
 from wikidata.client import Client
 import json
-from utils import iterator_from_file
 from urllib.error import HTTPError
 
 
@@ -32,7 +31,7 @@ if __name__ == "__main__":
 
     client = Client()
 
-    it = map(json.loads, list(iterator_from_file(args.file)))
+    it = map(json.loads, list(iterate(args.file)))
     occ = set()
     countries = set()
     for i in tqdm(it):
